@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles or /articles.json
   def index
+      @genre_names = ['四字熟語', '故事・諺', '熟語訓・当て字', '読み取り', '書取り', '国字', '熟語と訓読み', '対義語・類義語', 'テスト']
     if user_signed_in?
       @user = User.find(current_user.id)
       # スコアの計算
@@ -13,11 +14,12 @@ class ArticlesController < ApplicationController
       end
       # ユーザーの状況に応じて記事の量を分ける
       @articles = Article.where('level <= ?', @user.rank_id)
-      # ジャンル毎に一覧を取得
-      @genre1 = @articles.where(genre: 1)
-      @genre_test = @articles.where(genre: 2)
+      # レベル数値
+      @all_rank = @user.rank_id
     elsif admin_signed_in?
       @articles = Article.all
+      # 全てのレベル数値
+      @all_rank = 5
     end
   end
 

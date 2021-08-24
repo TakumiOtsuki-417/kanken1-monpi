@@ -12,27 +12,27 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
+    <%= form.label :title, "記事のタイトル" %>
     <%= form.text_field :title %>
   </div>
 
   <div class="field">
-    <%= form.label :content %>
+    <%= form.label :content, "記事の内容" %>
     <%= form.text_area :content, class: "tinymce" %>
   </div>
 
   <div class="field">
-    <%= form.label :genre %>
+    <%= form.label :genre, "記事のジャンル" %>
     <%= form.text_field :genre %>
   </div>
 
   <div class="field">
-    <%= form.label :level %>
+    <%= form.label :level, "記事のレベル" %>
     <%= form.text_field :level %>
   </div>
   
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit value: "記事を保存" %>
   </div>
 <% end %>
 <script>
