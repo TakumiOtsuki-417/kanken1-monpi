@@ -1,0 +1,63 @@
+<h1>Quests#index</h1>
+
+<% # 管理者アカウントの場合、登録問題一覧表示 %>
+<% if admin_signed_in? %>
+
+  <% if @quests.any? %>
+
+    <% @quests.each do |quest| %>
+      <% selects = [quest.select1, quest.select2, quest.select3, quest.select4] %>
+      <% rand_selects = selects.sort_by{rand} %>
+      <p><%= quest.question %></p>
+      <% rand_selects.each do |sel| %>
+        <p><%= sel %></p>
+      <% end %>
+      <p><%= quest.answer %></p>
+      <p><%= quest.explain %></p>
+      <%= link_to "セット解除", article_quest_path(@article.id, quest.id), method: :delete %>
+    <% end %>
+
+  <% else %>
+
+  <p>まだ何もセットされてません</p>
+
+  <% end %>
+
+  <p><%= link_to "問題をセットする", new_article_quest_path(@article.id) %></p>
+
+<% else %>
+
+  <h2>記事に関連する問題です！</h2>
+  <p>以下の問題に答えてください。</p>
+
+  <% # @resoreが定義されてる場合はupdate、されてない場合はcreateに飛んでくれ！ %>
+  <% if @rescore.nil? %>
+    <% form_url = article_scores_path(@article.id) %>
+    <% method = 'post' %>
+  <% else %>
+    <% form_url = article_score_path(@article.id, @score_id) %>
+    <% method = 'patch' %>
+    
+  <% end %>
+    <%= form_with model: @score, url: form_url, method: method, local: true, id: "quest-form" do |f| %>
+      <%#  エラーメッセージを表示してくれるはず %> 
+      <%= render 'quests/error_messages', model: @score %>
+      <% num = 0 %>
+      <% @quests.each do |quest| %>
+        <% num += 1 %>
+        <% selects = [quest.select1, quest.select2, quest.select3, quest.select4] %>
+        <% rand_selects = selects.sort_by{rand} %>
+        <p><%= quest.question %></p>
+        <% rand_selects.each do |sel| %>
+            <%= f.radio_button "select#{ num }", sel, class:"quest-radio" %>
+            <%= f.label "select#{ num }", sel, value: sel %>
+        <% end %>
+          <p class="second-content"><%= quest.answer %></p>
+          <p class="second-content"><%= quest.explain %></p>
+      <% end %>
+      <p>----------</p>
+      <input type="button" id="first-btn" value="回答する（正答を表示）">
+      <%= f.submit value: "回答する", class: "second-content" %>
+    <% end %>
+<% end %>
+  <%= link_to '問題一覧へ戻る', articles_path %>

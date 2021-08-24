@@ -1,0 +1,28 @@
+body{
+  min-height: 100vh;
+  position: relative;
+}
+
+p {
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+#notice{
+  padding-top:40px;
+}
+
+#wrap-header, #wrap-main, #wrap-footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#inner-header, #inner-main, #inner-footer {
+  max-width: 1200px;
+  width: 100%;
+}
+

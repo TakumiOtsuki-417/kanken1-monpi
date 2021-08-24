@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>問題一覧です</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>問題文</th>
+      <th>Level</th>
+      <th>Genre</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.question %></td>
+        <td><%= question.level %></td>
+        <td><%= question.genre %></td>
+        <td><%= link_to 'Show', makequest_path(question) %></td>
+        <% if admin_signed_in? %>
+          <td><%= link_to 'Edit', edit_makequest_path(question) %></td>
+          <td><%= link_to 'Destroy', makequest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+  <%= link_to '新しい問題文を作成', new_makequest_path %>
+  <%= link_to '問題一覧へ戻る', articles_path %>

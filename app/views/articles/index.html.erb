@@ -1,0 +1,98 @@
+<div id="notice"><%= notice %></div>
+<% if user_signed_in? %>
+  <h1>ユーザーの情報</h1>
+  <p>scoreの合計：<%= @total_score %></p>
+  <p>称号：<%= @user.rank.name %></p>
+  <h1>Articles</h1>
+<% end %>
+
+    <!-- ここから専用のレイアウト -->
+    <section id="block-userinfo">
+      <h2>ユーザー情報</h2>
+      <div>称号写真</div>
+      <p>ユーザー名</p>
+      <p>称号：</p>
+      <p>総合スコア：</p>
+    </section>
+    <!-- 記事一覧のブロック -->
+    <main id="block-articles">
+      <section class="block-levels">
+        <div class="level">
+          <h2>レベル1</h2>
+        </div>
+    <% @genre1.each do |article| %>
+        <section class="block-genres">
+          <div class="genre">
+            <h3>ジャンル：読み取り</h3>
+          </div>
+          <ul>
+            <li>
+              <h4><%= article.title %></h4>
+              <p>SCORE:45</p>
+              <div><%= link_to 'Show', article %></div>
+              <div><%= link_to 'Show', article %></div>
+            </li>
+            <li>
+              <h4>[g1]読み取り2</h4>
+              <p>SCORE:45</p>
+              <div><a href="/">テキスト</a></div>
+              <div><a href="/">問題</a></div>
+            </li>
+          </ul>
+        </section>
+      </section>
+
+
+<table>
+  <% if admin_signed_in? || user_signed_in? %>
+
+  <tbody>
+  <% if admin_signed_in? %>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.title %></td>
+        <td><%= article.level %></td>
+        <td><%= article.genre %></td>
+        <td><%= link_to 'Show', article %></td>
+        <% if admin_signed_in? %>
+          <td><%= link_to 'Edit', edit_article_path(article) %></td>
+          <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  <% end %>
+    <p>----------</p>
+    <% @genre1.each do |article| %>
+      <tr>
+        <td><%= article.title %></td>
+        <td><%= article.level %></td>
+        <td><%= article.genre %></td>
+        <td><%= link_to 'Show', article %></td>
+        <% if admin_signed_in? %>
+          <td><%= link_to 'Edit', edit_article_path(article) %></td>
+          <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    <p>----------</p>
+    <% @genre_test.each do |article| %>
+      <tr>
+        <td><%= article.title %></td>
+        <td><%= article.content %></td>
+        <td><%= article.level %></td>
+        <td><%= article.genre %></td>
+        <td><%= link_to 'Show', article %></td>
+        <% if admin_signed_in? %>
+          <td><%= link_to 'Edit', edit_article_path(article) %></td>
+          <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if admin_signed_in? %>
+  <%= link_to '記事を追加する', new_article_path %>
+<% end %>

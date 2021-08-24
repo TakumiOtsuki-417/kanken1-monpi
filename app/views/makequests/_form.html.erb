@@ -1,0 +1,58 @@
+<%= form_with model: makequest, local: true do |form| %>
+  <% if makequest.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(makequest.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+        <% makequest.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :question %>
+    <%= form.text_field :question %>
+  </div>
+
+  <div class="field">
+    <%= form.label :select1 %>
+    <%= form.text_field :select1 %>
+  </div>
+  <div class="field">
+    <%= form.label :select2 %>
+    <%= form.text_field :select2 %>
+  </div>
+  <div class="field">
+    <%= form.label :select3 %>
+    <%= form.text_field :select3 %>
+  </div>
+  <div class="field">
+    <%= form.label :select %>
+    <%= form.text_field :select %>
+  </div>
+  <div class="field">
+    <%= form.label :answer %>
+    <%= form.text_field :answer %>
+  </div>
+
+  <div class="field">
+    <%= form.label :explain %>
+    <%= form.text_area :explain %>
+  </div>
+
+  <div class="field">
+    <%= form.label :genre %>
+    <%= form.text_field :genre %>
+  </div>
+
+  <div class="field">
+    <%= form.label :level %>
+    <%= form.text_field :level %>
+  </div>
+  
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kanken1Monpi</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet"/>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= tinymce_assets %>
+  </head>
+  <body id="body">
+  <header id="wrap-header" class="wrap">
+    <div id="inner-header" class="inner">
+      <div id="header-logo">
+        <h1>ロゴです。</h1>
+      </div>
+      <div id="header-nav">
+        <ul>
+          <% if user_signed_in? %>
+            <li>ユーザー</li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+          <% elsif admin_signed_in? %>
+            <li>管理者</li>
+            <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+          <% else %>
+            <li>ゲストユーザー</li>
+            <li><%= link_to "新規登録", new_user_registration_path %></li>
+            <li><%= link_to "ログイン", new_user_session_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <div id="wrap-main" class="wrap">
+    <div id="inner-main" class="inner">
+      <%= yield %>
+    </div>
+  </div>
+  <footer id="wrap-footer" class="wrap">
+    <div id="inner-footer" class="inner">
+      <div id="copyright">
+        <p><small>Copyright 2021 &copy;漢検１級の門扉.</small></p>
+      </div>
+    </div>
+  </footer>
+  <div id="menu-btn">
+    <span class="menu-control-open" id="menuControlOpen">
+      <span class="drawer-line"></span>
+    </span>
+  </div>
+  <div class="menu">
+      <div class="menu-inner">
+          <nav>
+              <a href="#">Work</a>
+              <a href="#">Notes</a>
+              <a href="#">Info</a>
+          </nav>
+      </div>
+  </div>        
+</body>
+</html>

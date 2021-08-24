@@ -1,0 +1,14 @@
+<h1>新しく問題をセットする</h1>
+<%= form_with model:@quest, url: article_quests_path, local:true do |f| %>
+
+  <select name="quest[quest_id]">
+
+    <option value="">問題文をセットしてください</option>
+    <% @select_quests.each do |q| %>
+    <option value=<%= q.id %>><%= q.question %>/<%= q.answer %></option>
+    <% end %>
+  </select>
+  <input type="hidden" name="quest[article_id]" value="<%= @article.id %>">
+  <%= f.submit %>
+
+<% end %>

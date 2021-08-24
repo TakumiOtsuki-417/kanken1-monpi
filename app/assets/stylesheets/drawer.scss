@@ -1,0 +1,188 @@
+/* GENERAL STYLING: NOT NECESSARY */
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+*, *:before, *:after {
+  box-sizing: border-box; }
+::-moz-selection {
+  background: #ff6060;
+  color: #373331; }
+::selection {
+  background: #ff6060;
+  color: #373331; }
+
+/* END OF GENERAL STYLING */
+
+/* START OF USEFUL CODE */
+  h1 {
+    font-size: 2.2rem;
+    float: left; 
+    margin-top: 5px;
+  }
+  
+  a {
+    text-decoration: none; 
+  }
+  
+  #menu-btn {
+    position:fixed;
+    display:inline-block;
+    top:20px;
+    right:20px;
+    z-index:100;
+  }
+
+  .drawer-line,
+  .drawer-line:before,
+  .drawer-line:after {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 25px;
+    border-radius: 3px;
+    background: #333;
+    transition: 0.5s;
+    position: absolute;
+  }
+
+    /* 三本線のうち一番上の棒の位置調整 */
+    .drawer-line::before {
+      bottom: 8px;
+    }
+
+    /* 三本線のうち一番下の棒の位置調整 */
+    .drawer-line::after {
+      top: 8px;
+    }
+
+  span.menu-control-open,
+  span.menu-control-close,
+  nav,
+  a {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #F0F0F0; 
+  }
+  
+  span.menu-control-open,
+  span.menu-control-close,
+  nav a {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem; 
+  }
+  
+  span.menu-control-open,
+  span.menu-control-close {
+    display: block;
+    cursor: pointer; 
+  }
+  
+  span.menu-control-open {
+    position: relative;
+    font-size: 1.2rem;
+    line-height: 150%;
+    margin-top: 5px;
+    display:inline-block;
+    height:50px;
+    width: 50px;
+
+  }
+  
+  span.menu-control-close {
+    font-size: 1.2rem;
+    text-align: right; 
+  }
+  
+  nav {
+    display: flex;
+    flex-direction: column; 
+  }
+
+
+.menu {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #373331;
+  color: #F0F0F0;
+  height: 0;
+  width: 100vw;
+  overflow: hidden;
+  transition: all .5s ease-in-out;
+  a {
+    transform: translate3d(0, 500px, 0);
+    transition: transform .15s ease-in; 
+  }
+  
+  .menu-inner {
+    position: relative;
+    height: 100%;
+    width: 100vw;
+    padding: 1.5rem; 
+  }
+
+}
+
+.menu--active {
+  height: 100vh;
+  overflow: hidden; 
+
+  /* アイコンがクリックされたら真ん中の線を透明にする */
+  .drawer-line {
+    background: rgba(255, 255, 255, 0);
+  }
+
+  /* アイコンがクリックされたらアイコンが×印になように上下の線を回転 */
+  .drawer-line::before {
+    bottom: 0;
+    transform: rotate(45deg);
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  .drawer-line::after {
+    top: 0;
+    transform: rotate(-45deg);
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  
+  .menu{
+    height:100vh;
+    background-color:rgba(0,0,0,0.8);
+  }
+
+  nav a {
+    transform: translate3d(0, 0, 0);
+    transition: transform 600ms ease-out; 
+  
+    /* Handles items within the slide-out to give them the delayed slide-in */
+    &:first-child {
+      transition-delay: .2s; 
+    }
+    &:nth-child(2) {
+      transition-delay: .3s; 
+    }
+    &:last-child {
+      transition-delay: .4s; 
+    }
+  }
+}
+
+// This media query sets the width of the menu to be larger on a smaller screen
+ @media screen and (max-width: 767px) {
+  .menu--active .menu {
+    width: 80%; }
+}
+
+// This media query sets the menu width to be slightly smaller on a larger screen (think an iPad)
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .menu--active .menu {
+    width: 40%;
+    .menu-inner {
+      width: 40vw;
+    }
+  }
+}
