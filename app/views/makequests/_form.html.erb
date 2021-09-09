@@ -1,4 +1,9 @@
-<%= form_with model: makequest, local: true do |form| %>
+<% if action_name == 'new' %>
+<% form_url = makequests_path %>
+<% else %>
+<% form_url = makequest_path(params[:id]) %>
+<% end %>
+<%= form_with model: makequest, url: form_url, local: true do |form| %>
   <% if makequest.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(makequest.errors.count, "error") %> prohibited this article from being saved:</h2>
@@ -12,47 +17,47 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :question %>
-    <%= form.text_field :question %>
+    <div><%= form.label :question, value: "お題の文章" %></div>
+    <div><%= form.text_field :question %></div>
   </div>
 
   <div class="field">
-    <%= form.label :select1 %>
-    <%= form.text_field :select1 %>
+    <div><%= form.label :select1, value: "選択肢1" %></div>
+    <div><%= form.text_field :select1, class: "mini-field" %></div>
   </div>
   <div class="field">
-    <%= form.label :select2 %>
-    <%= form.text_field :select2 %>
+    <div><%= form.label :select2, value: "選択肢2" %></div>
+    <div><%= form.text_field :select2, class: "mini-field" %></div>
   </div>
   <div class="field">
-    <%= form.label :select3 %>
-    <%= form.text_field :select3 %>
+    <div><%= form.label :select3, value: "選択肢3" %></div>
+    <div><%= form.text_field :select3, class: "mini-field" %></div>
   </div>
   <div class="field">
-    <%= form.label :select %>
-    <%= form.text_field :select %>
+    <div><%= form.label :select4, value: "選択肢4" %></div>
+    <div><%= form.text_field :select4, class: "mini-field" %></div>
   </div>
   <div class="field">
-    <%= form.label :answer %>
-    <%= form.text_field :answer %>
-  </div>
-
-  <div class="field">
-    <%= form.label :explain %>
-    <%= form.text_area :explain %>
+    <div><%= form.label :answer, value: "正答（いずれかの選択肢と同じにすること！）" %></div>
+    <div><%= form.text_field :answer, class: "mini-field" %></div>
   </div>
 
   <div class="field">
-    <%= form.label :genre %>
-    <%= form.text_field :genre %>
+    <div><%= form.label :explain, value: "解説文" %></div>
+    <div><%= form.text_area :explain %></div>
   </div>
 
   <div class="field">
-    <%= form.label :level %>
-    <%= form.text_field :level %>
+    <div><%= form.label :genre, value: "問題ジャンル" %></div>
+    <div><%= form.collection_select(:genre, Genre.all, :id, :name, {}, {class:"genre-select"}) %></div>
+  </div>
+
+  <div class="field">
+    <div><%= form.label :level, value: "問題レベル" %></div>
+    <div><%= form.collection_select(:level, Rank.all, :id, :name, {}, {class:"genre-select"}) %></div>
   </div>
   
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "送信" %>
   </div>
 <% end %>

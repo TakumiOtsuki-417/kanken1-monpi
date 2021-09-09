@@ -1,34 +1,49 @@
+<main id="block-signin">
+
+
 <h2>新規登録</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :nickname %><br />
-    <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname" %>
+    <div class="col">
+      <%= f.label :nickname %><br />
+      <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", placeholder: "ニックネーム" %>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="col">
+      <div><%= f.label :email, value:"メールアドレス" %></div>
+      <div><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"@必須" %></div>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <div class="col">
+      <div><%= f.label :password, value: "パスワード" %></div>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> 文字以上)</em>
+      <% end %><br />
+      <div><%= f.password_field :password, autocomplete: "new-password" %></div>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <div class="col">
+      <div><%= f.label :password_confirmation, value: "パスワード確認" %></div>
+      <div><%= f.password_field :password_confirmation, autocomplete: "new-password" %></div>
+    </div>
   </div>
   <input name="user[rank]" type="hidden" value="0">
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規登録する" %>
   </div>
 <% end %>
 
 <%= render "users/shared/links" %>
+
+</main>
+
+

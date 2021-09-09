@@ -2,14 +2,54 @@ body{
   min-height: 100vh;
   position: relative;
   padding-bottom:100px;
+  background-color:rgba(255, 145, 145, 0.596);
 }
 
 p {
   margin: 0;
 }
 
+ul {
+  padding: 0;
+  margin: 0;
+}
+
 li {
   list-style: none;
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
+html {
+  font-size: 100%;
+ 
+  // 600px以降から、100pxごとに1px大きくなる
+  @media (min-width: 600px) {
+    font-size: calc(112.5% + 4 * (100vw - 600px) / 400)
+  }
+ 
+  // 1,000px以上は、22pxに
+  @media (min-width: 1000px) {
+    font-size: calc(137.5%)
+  }
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+}
+
+h4 {
+  font-size: 1.0rem;
 }
 
 #notice{
@@ -27,3 +67,34 @@ li {
   width: 100%;
 }
 
+
+// サインイン（サインアップ）用CSS
+
+#block-signin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .field{
+
+    .col{
+      margin-bottom:20px;
+    }
+    br{
+      height: 0;
+    }
+
+  }
+
+  #remember {
+    display: flex;
+    justify-content: center;
+  }
+
+  #block-submit {
+    display: flex;
+    justify-content: center;
+  }
+
+}

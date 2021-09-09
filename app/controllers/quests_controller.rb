@@ -1,4 +1,6 @@
 class QuestsController < ApplicationController
+  before_action :redirect_user, except: [:index]
+
   def index
     @article = Article.find(params[:article_id])
     @article_quests = ArticleQuest.where(article_id: @article.id)
@@ -18,6 +20,10 @@ class QuestsController < ApplicationController
       else
         @score = ScoreUpdate.new
       end
+    end
+    if admin_signed_in?
+      #登録された問題数をカウント
+      @quest_count = @article_quests.length
     end
   end
   def show
@@ -39,15 +45,27 @@ class QuestsController < ApplicationController
     end
   end
   def destroy
-    @article_quest = ArticleQuest.find(params[:id])
-    article_id = @article_quest.article_id
-    @article_quest.destroy
+    article_id = params[:article_id]
+    article_quest = ArticleQuest.find_by(quest_id: params[:id], article_id: article_id)
+    article_quest.destroy
     redirect_to article_quests_path(article_id)
   end
     private
-
+  def redirect_user
+    if !admin_signed_in?
+      redirect_to root_path
+    end
+  end
   def quest_params
     params.require(:quest).permit(:article_id, :quest_id)
+  end
+  def redirect_by_count
+    article = Article.find(params[:article_id])
+    article_quests = ArticleQuest.where(article_id: article.id)
+    quest_count = article_quests.length
+    if quest_count >= 100
+      redirect_to article_quests_path(article.id)
+    end
   end
 
 end

@@ -1,4 +1,4 @@
-class Rank < ActiveHash::Base
+class Genre < ActiveHash::Base
 
   self.data = [
     { id: 0, name: '四字熟語' },

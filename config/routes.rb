@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'helps/welcome'
   resources :articles do
     resources :quests, only: [:index, :new, :create, :destroy]
     resources :scores, only: [:create, :update]

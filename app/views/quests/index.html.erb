@@ -1,20 +1,32 @@
-<h1>Quests#index</h1>
+
+<main id="block-quests">
+<h1><%= @article.title %>より出題！</h1>
+<article>
 
 <% # 管理者アカウントの場合、登録問題一覧表示 %>
 <% if admin_signed_in? %>
-
+<h2>セットされた問題一覧</h2>
+<p>セット数：<%= @quest_count %></p>
   <% if @quests.any? %>
 
     <% @quests.each do |quest| %>
       <% selects = [quest.select1, quest.select2, quest.select3, quest.select4] %>
-      <% rand_selects = selects.sort_by{rand} %>
-      <p><%= quest.question %></p>
-      <% rand_selects.each do |sel| %>
-        <p><%= sel %></p>
-      <% end %>
-      <p><%= quest.answer %></p>
-      <p><%= quest.explain %></p>
-      <%= link_to "セット解除", article_quest_path(@article.id, quest.id), method: :delete %>
+      <section class="block-quest">
+        <h3><%= quest.question %></h3>
+        <p>🔻選択肢🔻</p>
+        <ul>
+        <% selects.each do |sel| %>
+          <li><%= sel %></li>
+        <% end %>
+        </ul>
+        <p>🔻正解🔻</p>
+        <div class="block-answer"><%= quest.answer %></div>
+        <p>🔻解説🔻</p>
+        <div class="block-explain"><%= quest.explain %></div>
+        <div>
+          <%= link_to "セット解除", article_quest_path(@article.id, quest.id), method: :delete %>
+        </div>
+      </section>
     <% end %>
 
   <% else %>
@@ -22,15 +34,15 @@
   <p>まだ何もセットされてません</p>
 
   <% end %>
-
-  <p><%= link_to "問題をセットする", new_article_quest_path(@article.id) %></p>
-
+  <% if @quest_count <= 100 %>
+    <p><%= link_to "問題をセットする", new_article_quest_path(@article.id) %></p>
+  <% end %>
 <% else %>
 
-  <h2>記事に関連する問題です！</h2>
-  <p>以下の問題に答えてください。</p>
+  <h2>記事に関連した問題です（４択形式）！<br>
+  以下の問題に答えてください。</h2>
 
-  <% # @resoreが定義されてる場合はupdate、されてない場合はcreateに飛んでくれ！ %>
+  <% # @rescoreが定義されてる場合はupdate、されてない場合はcreateに飛んでくれ！ %>
   <% if @rescore.nil? %>
     <% form_url = article_scores_path(@article.id) %>
     <% method = 'post' %>
@@ -47,17 +59,32 @@
         <% num += 1 %>
         <% selects = [quest.select1, quest.select2, quest.select3, quest.select4] %>
         <% rand_selects = selects.sort_by{rand} %>
-        <p><%= quest.question %></p>
-        <% rand_selects.each do |sel| %>
-            <%= f.radio_button "select#{ num }", sel, class:"quest-radio" %>
-            <%= f.label "select#{ num }", sel, value: sel %>
-        <% end %>
-          <p class="second-content"><%= quest.answer %></p>
-          <p class="second-content"><%= quest.explain %></p>
+        <section id="block-quest-<%= num %>" class="block-quest">
+          <h3><%= quest.question %></h3>
+          <% rand_selects.each do |sel| %>
+            <div class="select-radio">
+              <%= f.radio_button "select#{ num }", sel, class:"quest-radio" %>
+              <%= f.label "select#{ num }", sel, value: sel %>
+            </div>
+          <% end %>
+          <div class="second-content">
+            <h3>正解と解説</h3>
+            <div><%= quest.answer %></div>
+            <div><%= quest.explain %></div>
+          </div>
+        </section>
       <% end %>
-      <p>----------</p>
-      <input type="button" id="first-btn" value="回答する（正答を表示）">
-      <%= f.submit value: "回答する", class: "second-content" %>
+      <div id="block-answer">
+        <div id="nocheck-message">未回答の問題が残っています（赤背景のもの）。<br>全ての問題にチェック回答をしてください。</div>
+        <input type="button" id="first-btn" value="回答する（正答を表示）">
+        <%= f.submit value: "回答する", class: "second-content" %>
+      </div>
     <% end %>
+  <%= link_to 'テキストへ戻る', article_path(@article.id) %>
 <% end %>
-  <%= link_to '問題一覧へ戻る', articles_path %>
+
+
+</article>
+</main>
+
+

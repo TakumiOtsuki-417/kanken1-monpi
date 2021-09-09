@@ -2,10 +2,45 @@ header {
   overflow: visible;
   background-color: transparent;
   width: 100%;
-  height: 5rem;
+  min-height: 5rem;
   padding: 1.5rem;
   border-bottom: 1px solid black;
-  margin-bottom:50px;
+  margin-bottom:30px;
+
+  #inner-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    #header-logo {
+      width: 100%;
+      margin-bottom:20px;
+    }
+
+    #header-nav {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+  
+      ul {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+  
+        .user-link {
+          margin-left: 10px;
+          border: 1px double rgba(0,0,0,0.5);
+  
+          a {
+            display:block;
+            padding:3px 5px;
+          }
+        }
+      }
+    }
+  }
 }
 
 

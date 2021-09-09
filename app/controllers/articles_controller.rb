@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[ show edit update destroy ]
+  before_action :set_article, only: [ :show, :edit, :update, :destroy ]
 
   # GET /articles or /articles.json
   def index
@@ -16,6 +16,7 @@ class ArticlesController < ApplicationController
       @articles = Article.where('level <= ?', @user.rank_id)
       # レベル数値
       @all_rank = @user.rank_id
+      @user_rank = Rank.find(@user.rank_id).name
     elsif admin_signed_in?
       @articles = Article.all
       # 全てのレベル数値

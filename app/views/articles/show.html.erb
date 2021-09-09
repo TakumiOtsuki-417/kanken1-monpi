@@ -1,28 +1,35 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @article.content %>
-</p>
-
-<p>
-  <strong>Level:</strong>
-  <%= @article.level %>
-</p>
-
-<p>
-  <strong>Genre:</strong>
-  <%= @article.genre %>
-</p>
 <% if admin_signed_in? %>
-  <%= link_to '問題文をセットする', new_article_quest_path(@article) %>
-<% elsif user_signed_in? %>
-  <%= link_to '問題に挑戦する', article_quests_path(@article) %>
+<div id="link-nav">
+  <div><%= link_to '問題文をセットする', new_article_quest_path(@article) %></div>
+  <div><%= link_to 'この記事を編集する', edit_article_path(@article) %></div>
+</div>
 <% end %>
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+<main id="block-article">
+  <article>
+    <div id="block-meta">
+      <h1><%= @article.title %></h1>
+    </div>
+    <section id="block-content">
+      <h2>さあ、頑張ろう！</h2>
+      <%= @article.content.html_safe %>
+    </section>
+    <section id="block-link">
+    <% if user_signed_in? %>    
+      <h2>問題に挑戦しよう！</h2>
+      <p>以下のリンクから、この記事に基づいた問題に挑戦することができます。</p>
+      <div id="link">
+        <%= link_to '問題に挑戦する', article_quests_path(@article) %>
+      </div>
+    </section>
+    <% end %>
+    <% if admin_signed_in? %>
+      <h2>記事は以上でした。</h2>
+      <div id="link">
+        <div><%= link_to '問題文をセットする', new_article_quest_path(@article) %></div>
+        <div><%= link_to 'この記事を編集する', edit_article_path(@article) %></div>
+        <div><%= link_to '一覧に戻る', articles_path %></div> 
+      </div>
+    <% end %>
+  </article>
+</main>

@@ -1,33 +1,43 @@
 <p id="notice"><%= notice %></p>
 
-<h1>問題一覧です</h1>
+<main id="block-makequest">
 
-<table>
-  <thead>
-    <tr>
-      <th>問題文</th>
-      <th>Level</th>
-      <th>Genre</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @questions.each do |question| %>
-      <tr>
-        <td><%= question.question %></td>
-        <td><%= question.level %></td>
-        <td><%= question.genre %></td>
-        <td><%= link_to 'Show', makequest_path(question) %></td>
-        <% if admin_signed_in? %>
-          <td><%= link_to 'Edit', edit_makequest_path(question) %></td>
-          <td><%= link_to 'Destroy', makequest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <section id="block-index">
+    <h1>問題一覧です</h1>
+    <div id="block-select-genre">
+      <ul>
+        <% Genre.all.each do |g| %>
+          <li id="tab-<%= g.id %>" class="tab"><%= g.name %></li>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </ul>
+    </div>
+    <% 9.times do |i| %>
+    <section id="genre-<%= i %>" class="genres">
+      <h2>ジャンル：<%= Genre.find_by(id: i).name %></h2>
+      <ul class="quests">
+        <% instance_variable_get("@genre#{ i }").each do |q| %>
+        <li class="quest">
+          <section>
+            <h3>正答：<%= q.answer %></h3>
+            <div class="explain">解説：<%= q.explain %></div>
+            <div class="meta">
+              <p>レベル：<%= Rank.find_by(id: q.level).name %></p>
+              <p>ジャンル：<%= Genre.find_by(id: q.genre).name %></p>
+            </div>
+            <div class="link">
+              <%= link_to '詳細', makequest_path(q.id) %>
+              <%= link_to '編集', edit_makequest_path(q.id) %>
+              <%= link_to '削除', makequests_path(q.id), method: :delete, data: { confirm: 'マジで削除しますか?' } %>
+            </div>
+          </section>
+        </li>
+        <% end %>
+      </ul>
 
-<br>
+    </section>
+    <% end %>
+  </section>
+
+</main>
   <%= link_to '新しい問題文を作成', new_makequest_path %>
   <%= link_to '問題一覧へ戻る', articles_path %>

@@ -1,7 +1,12 @@
 class MakequestsController < ApplicationController
+  before_action :redirect_user
   before_action :set_question, only: %i[ show edit update destroy ]
   def index
     @questions = Quest.all
+    #0~8までのジャンルに分けてインスタンス変数生成
+    9.times do |i|
+      each_genre(i)
+    end
   end
   def show
     
@@ -23,6 +28,7 @@ class MakequestsController < ApplicationController
     end
   end
   def edit
+    @makequest = Quest.find(params[:id])
   end
   def update
     respond_to do |format|
@@ -44,13 +50,20 @@ class MakequestsController < ApplicationController
   end
 
   private
-
+  def redirect_user
+    if !admin_signed_in?
+      redirect_to root_path
+    end
+  end
   def set_question
     @question = Quest.find(params[:id])
   end
   def question_params
     params.permit(:question, :select1, :select2, :select3, :select4, :answer, :explain, :level, :genre)
   end
-
+  def each_genre(num)
+    question_value = @questions.where(genre: num)
+    instance_variable_set("@genre#{ num }", question_value)
+  end
 
 end

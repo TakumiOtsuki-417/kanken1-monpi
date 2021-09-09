@@ -17,15 +17,17 @@ a {
 /* END OF GENERAL STYLING */
 
 /* START OF USEFUL CODE */
+#menu-wrap {
   h1 {
-    font-size: 2.2rem;
-    float: left; 
-    margin-top: 5px;
-  }
-  
-  a {
-    text-decoration: none; 
-  }
+      font-size: 2.2rem;
+      float: left; 
+      margin-top: 5px;
+    }
+    
+    a {
+      text-decoration: none; 
+    }
+}
   
   #menu-btn {
     position:fixed;
@@ -70,8 +72,8 @@ a {
   span.menu-control-open,
   span.menu-control-close,
   nav a {
-    font-size: 2.2rem;
-    margin-bottom: 1.5rem; 
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
   }
   
   span.menu-control-open,
@@ -103,7 +105,7 @@ a {
 
 
 .menu {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   background-color: #373331;
@@ -112,7 +114,10 @@ a {
   width: 100vw;
   overflow: hidden;
   transition: all .5s ease-in-out;
-  a {
+  li {
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    text-align:center;
     transform: translate3d(0, 500px, 0);
     transition: transform .15s ease-in; 
   }
@@ -154,7 +159,7 @@ a {
     background-color:rgba(0,0,0,0.8);
   }
 
-  nav a {
+  nav li {
     transform: translate3d(0, 0, 0);
     transition: transform 600ms ease-out; 
   
@@ -174,7 +179,7 @@ a {
 // This media query sets the width of the menu to be larger on a smaller screen
  @media screen and (max-width: 767px) {
   .menu--active .menu {
-    width: 80%; }
+    width: 100%; }
 }
 
 // This media query sets the menu width to be slightly smaller on a larger screen (think an iPad)

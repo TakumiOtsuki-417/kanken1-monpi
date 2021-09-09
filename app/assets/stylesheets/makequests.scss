@@ -1,3 +1,141 @@
 // Place all the styles related to the makequests controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#block-makequest {
+  min-height: 90vh;
+
+
+  form {
+    display:flex;
+    justify-content: start;
+    flex-direction: column;
+    max-width: 500px;
+
+    .field {
+      width: 100%;
+      margin-bottom:20px;
+
+      input, textarea {
+        width:100%;
+      }
+
+      input {
+        height:30px;
+      }
+
+      textarea {
+        min-height:150px;
+        overflow-y: scroll;
+      }
+
+      .mini-field {
+        width: 40%;
+        min-width:160px;
+      }
+
+      select {
+        width: 40%;
+        min-width: 220px;
+        max-width:400px;
+        height:30px;
+      }
+
+    }
+
+  }
+
+  #block-index {
+    h1 {
+      margin-bottom: 30px;
+      padding-left: 5px;
+      border-left: 10px solid rgba(200,0,0,0.8)
+    }
+
+    h2 {
+      max-width: 260px;
+      margin-bottom: 20px;
+      padding-left: 5px;
+      border-left: 5px solid rgba(0,0,0,0.8);
+      border-bottom: 2px solid rgba(0,0,0,0.8);
+    }
+
+    #block-select-genre {
+      margin-top: 20px;
+      margin-bottom: 20px;
+
+      ul {
+        display: flex;
+        flex-direction: start;
+
+        li {
+          border: 1px solid #00000099;
+          padding: 2px 4px;
+          margin: 0 4px;
+          cursor: pointer;
+          transition: all 0.2s;
+
+          &:hover {
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+          }
+          &.is-active {
+            background-color:rgba(0,0,0,0.8);
+            color: white;
+          }
+        }
+
+
+      }
+
+
+    }
+
+
+    @keyframes show{
+      from{
+          opacity: 0;
+      }
+      to{
+          opacity: 1;
+      }
+    }
+    @-moz-keyframes show{
+      from{
+        opacity: 0;
+      }
+      to{
+          opacity: 1;
+      }
+    }
+    @-webkit-keyframes show{
+      from{
+        opacity: 0;
+      }
+      to{
+          opacity: 1;
+      }
+    }
+    .genres {
+      display: none;
+
+      &.is-active {
+        display: block;
+        animation: show 0.2s linear 0s;
+      }
+    }
+
+
+
+    .quest {
+      max-width:600px;
+      border: 1px solid rgba(0,0,0,0.6);
+      margin-bottom: 10px;
+      padding:7px 5px;
+    }
+
+
+  }
+
+}
+

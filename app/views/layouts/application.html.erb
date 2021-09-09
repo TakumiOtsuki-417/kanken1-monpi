@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Kanken1Monpi</title>
-    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">    <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link href="https://unpkg.com/sanitize.css" rel="stylesheet"/>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -13,20 +13,22 @@
   <header id="wrap-header" class="wrap">
     <div id="inner-header" class="inner">
       <div id="header-logo">
-        <h1>ロゴです。</h1>
+        <%= link_to root_path do %><h1>ロゴです。</h1><% end %>
       </div>
       <div id="header-nav">
         <ul>
           <% if user_signed_in? %>
-            <li>ユーザー</li>
-            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+            <li>ユーザーです</li>
+            <li class="user-link"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
           <% elsif admin_signed_in? %>
-            <li>管理者</li>
-            <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+            <li>管理者です</li>
+            <li class="user-link"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+            <li class="user-link"><%= link_to "記事を作成する", new_article_path %></li>
+            <li class="user-link"><%= link_to "問題文を作成する", new_makequest_path %></li>
           <% else %>
             <li>ゲストユーザー</li>
-            <li><%= link_to "新規登録", new_user_registration_path %></li>
-            <li><%= link_to "ログイン", new_user_session_path %></li>
+            <li class="user-link"><%= link_to "新規登録", new_user_registration_path %></li>
+            <li class="user-link"><%= link_to "ログイン", new_user_session_path %></li>
           <% end %>
         </ul>
       </div>
@@ -49,12 +51,21 @@
       <span class="drawer-line"></span>
     </span>
   </div>
-  <div class="menu">
+  <div class="menu" id="menu-wrap">
       <div class="menu-inner">
           <nav>
-              <a href="#">Work</a>
-              <a href="#">Notes</a>
-              <a href="#">Info</a>
+              <ul>
+                <% if user_signed_in? %>
+                  <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+                <% elsif admin_signed_in? %>
+                  <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+                  <li><%= link_to "記事を作成する", new_article_path %></li>
+                  <li><%= link_to "問題文を作成する", new_makequest_path %></li>
+                <% else %>
+                  <li><%= link_to "新規登録", new_user_registration_path %></li>
+                  <li><%= link_to "ログイン", new_user_session_path %></li>
+              <% end %>
+              </ul>
           </nav>
       </div>
   </div>        
