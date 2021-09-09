@@ -3,8 +3,8 @@ class CreateArticles < ActiveRecord::Migration[6.0]
     create_table :articles do |t|
       t.string :title, null:false
       t.text :content, null:false
-      t.integer :level, null:false
-      t.integer :genre, null:false
+      t.integer :rank_id, null:false
+      t.integer :genre_id, null:false
       t.timestamps
     end
   end

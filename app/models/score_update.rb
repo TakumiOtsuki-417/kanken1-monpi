@@ -13,6 +13,7 @@ class ScoreUpdate
   with_options presence: true do
     validates :score_update
     validates :article_id
+    validates :user_id
   end
 
 

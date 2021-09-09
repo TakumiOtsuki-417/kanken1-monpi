@@ -59,7 +59,7 @@ kanken-1-monpi (漢検１級門扉)
 | ------------------ | ------ | ------------------------- |
 | email              | string | null: false, unique: true |
 | encrypted_password | string | null: false               |
-| nickname           | string | null: false               |
+| nickname           | string |                           |
 
 
 ## articles テーブル
@@ -69,7 +69,7 @@ kanken-1-monpi (漢検１級門扉)
 | title              | string   | null: false      |
 | content            | text     | null: false      |
 | genre_id           | integer  | null: false      |
-| level_id           | integer  | null: false      |
+| rank_id            | integer  | null: false      |
 
 ### Association
 
@@ -95,7 +95,7 @@ kanken-1-monpi (漢検１級門扉)
 | answer   | text    | null: false      |
 | explain  | text    | null: false      |
 | genre_id | integer | null: false      |
-| level_id | integer | null: false      |
+| rank_id  | integer | null: false      |
 
 ### Association
 
@@ -125,7 +125,7 @@ kanken-1-monpi (漢検１級門扉)
 | ------ | ---------- | ------------------------------ |
 | user   | references | null: false, foreign_key: true |
 | quest  | references | null: false, foreign_key: true |
-| repeat | integer    | null: false                    |
+| repeat | integer    |                                |
 
 ### Association
 

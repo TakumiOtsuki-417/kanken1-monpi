@@ -3,6 +3,16 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+    # バリデーション
+
+    with_options presence: true do
+      validates :nickname
+      validates :email
+      validates :password
+      validates :rank_id
+    end
+
     # アソシエーション
     has_many :scores
     has_many :articles, through: :score

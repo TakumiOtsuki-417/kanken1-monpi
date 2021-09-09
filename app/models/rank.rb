@@ -1,5 +1,5 @@
 class Rank < ActiveHash::Base
-
+
   self.data = [
     { id: 0, name: '入門者' },
     { id: 1, name: '序の口' },

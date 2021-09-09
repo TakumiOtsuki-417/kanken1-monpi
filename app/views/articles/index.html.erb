@@ -14,7 +14,7 @@
   <!-- 記事一覧のブロック -->
   <main id="block-articles">
     <% @all_rank.times do |i| %>
-      <% level = i + 1 %>
+      <% level = i %>
       <section class="block-levels">
         <div class="level">
           <h2>レベル<%= level %></h2>
@@ -25,7 +25,7 @@
               <h3><%= @genre_names[o] %></h3>
             </div>
             <ul>
-            <% articles = Article.where(genre: o, level: level) %>
+            <% articles = Article.where(genre_id: o, rank_id: level) %>
             <% articles.each do |article| %>
               <li>
                 <h4><%= article.title %></h4>
@@ -34,7 +34,7 @@
                   <% unless score.nil? %>
                     <p>SCORE:<%= score.score %></p>
                   <% else %>
-                    <p>SCORE:0</p>
+                    <p>SCORE:0（未挑戦）</p>
                   <% end %>
                 <% end %>
                 <div><%= link_to '記事を読む', article_path(article.id) %></div>

@@ -59,10 +59,10 @@ class MakequestsController < ApplicationController
     @question = Quest.find(params[:id])
   end
   def question_params
-    params.permit(:question, :select1, :select2, :select3, :select4, :answer, :explain, :level, :genre)
+    params.permit(:question, :select1, :select2, :select3, :select4, :answer, :explain, :rank_id, :genre_id)
   end
   def each_genre(num)
-    question_value = @questions.where(genre: num)
+    question_value = @questions.where(genre_id: num)
     instance_variable_set("@genre#{ num }", question_value)
   end
 

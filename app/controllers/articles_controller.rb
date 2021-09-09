@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
       # ユーザーの状況に応じて記事の量を分ける
       @articles = Article.where('level <= ?', @user.rank_id)
       # レベル数値
-      @all_rank = @user.rank_id
+      @all_rank = @user.rank_id + 1
       @user_rank = Rank.find(@user.rank_id).name
     elsif admin_signed_in?
       @articles = Article.all
@@ -83,6 +83,6 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:title, :content, :level, :genre)
+      params.require(:article).permit(:title, :content, :rank_id, :genre_id)
     end
 end

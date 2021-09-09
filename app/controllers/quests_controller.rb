@@ -31,9 +31,9 @@ class QuestsController < ApplicationController
   end
   def new
     @article = Article.find(params[:article_id])
-    genre = @article.genre
-    level = @article.level
-    @select_quests = Quest.where(["genre = :genre and level <= :level", {genre: genre, level: level}])
+    genre = @article.genre_id
+    rank = @article.rank_id
+    @select_quests = Quest.where(["genre_id = :genre_id and rank_id <= :rank_id", {genre_id: genre, rank_id: rank}])
     
   end
   def create
