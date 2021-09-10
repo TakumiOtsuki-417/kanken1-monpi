@@ -125,7 +125,7 @@ kanken-1-monpi (漢検１級門扉)
 | ------ | ---------- | ------------------------------ |
 | user   | references | null: false, foreign_key: true |
 | quest  | references | null: false, foreign_key: true |
-| repeat | integer    |                                |
+| repeat | integer    | null: false                    |
 
 ### Association
 

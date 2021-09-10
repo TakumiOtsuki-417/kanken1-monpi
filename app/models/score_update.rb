@@ -105,23 +105,27 @@ class ScoreUpdate
     end
     # テストの合格数と総合スコアによって称号分け（これは得点が下回るケースを除外しているのでOK）
     @rank = 0
-    # 現在保存されているランクよりも上であれば上書き
-    @user = User.find(@user.id)
-    if @rank > @user.rank_id
-      @user.update(rank_id: @rank)
-    end
     case @total_score
-      when 0..279
+      when 100..279
         @rank = 1
       when 280..619
         if @test_ok >= 0
           @rank = 2
         end
-      when 620..nil
+      when 620..1199
         if @test_ok >= 2
           @rank = 3
         end
+      when 1200..nil
+        if @test_ok >= 3
+          @rank = 4
+        end
       else
+    end
+    # 現在保存されているランクよりも上であれば上書き
+    @user = User.find(@user.id)
+    if @rank > @user.rank_id
+      @user.update(rank_id: @rank)
     end
   end
 
