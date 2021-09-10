@@ -15,15 +15,15 @@ class MakequestsController < ApplicationController
     @makequest = Quest.new
   end
   def create
-    @question = Quest.new(question_params)
+    @makequest = Quest.new(question_params)
 
     respond_to do |format|
-      if @question.save
+      if @makequest.save
         format.html { redirect_to makequests_path, notice: "Question was successfully created." }
-        format.json { render :show, status: :created, location: @question }
+        format.json { render :show, status: :created, location: @makequest }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
+        format.json { render json: @makequest.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -32,17 +32,17 @@ class MakequestsController < ApplicationController
   end
   def update
     respond_to do |format|
-      if @question.update(question_params)
+      if @makequest.update(question_params)
         format.html { redirect_to makequests_path, notice: "Question was successfully updated." }
-        format.json { render :show, status: :ok, location: @question }
+        format.json { render :show, status: :ok, location: @makequest }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
+        format.json { render json: @makequest.errors, status: :unprocessable_entity }
       end
     end
   end
   def destroy
-    @question.destroy
+    @makequest.destroy
     respond_to do |format|
       format.html { redirect_to makequests_path, notice: "Question was successfully destroyed." }
       format.json { head :no_content }
@@ -56,10 +56,10 @@ class MakequestsController < ApplicationController
     end
   end
   def set_question
-    @question = Quest.find(params[:id])
+    @makequest = Quest.find(params[:id])
   end
   def question_params
-    params.permit(:question, :select1, :select2, :select3, :select4, :answer, :explain, :rank_id, :genre_id)
+    params.require(:quest).permit(:question, :select1, :select2, :select3, :select4, :answer, :explain, :rank_id, :genre_id)
   end
   def each_genre(num)
     question_value = @questions.where(genre_id: num)

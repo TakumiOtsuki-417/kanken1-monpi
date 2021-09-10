@@ -11,7 +11,7 @@ class Quest < ApplicationRecord
     validates :answer
     validates :explain
     with_options format: {with: /\A[0-9]+\z/, message: "is invalid. Input only half-number"} do
-      validates :genre_id, numericality: { less_than_or_equal_to: 8 }
+      validates :genre_id, numericality: { less_than_or_equal_to: 8, message: "must be less than or equal to 8" }
       validates :rank_id
     end
   end

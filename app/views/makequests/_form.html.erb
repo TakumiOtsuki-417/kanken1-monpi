@@ -1,4 +1,4 @@
-<% if action_name == 'new' %>
+<% if controller.action_name == 'new' || controller.action_name == 'create' %>
 <% form_url = makequests_path %>
 <% else %>
 <% form_url = makequest_path(params[:id]) %>
@@ -48,13 +48,13 @@
   </div>
 
   <div class="field">
-    <div><%= form.label :genre, value: "問題ジャンル" %></div>
-    <div><%= form.collection_select(:genre, Genre.all, :id, :name, {}, {class:"genre-select"}) %></div>
+    <div><%= form.label :genre_id, value: "問題ジャンル" %></div>
+    <div><%= form.collection_select(:genre_id, Genre.all, :id, :name, {}, {class:"genre-select"}) %></div>
   </div>
 
   <div class="field">
-    <div><%= form.label :level, value: "問題レベル" %></div>
-    <div><%= form.collection_select(:level, Rank.all, :id, :name, {}, {class:"genre-select"}) %></div>
+    <div><%= form.label :rank_id, value: "問題レベル" %></div>
+    <div><%= form.collection_select(:rank_id, Rank.all, :id, :name, {}, {class:"genre-select"}) %></div>
   </div>
   
   <div class="actions">

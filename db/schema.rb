@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2021_08_10_091538) do
 
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
-    t.text "content", null: false
+    t.text "content", size: :long, null: false
     t.integer "rank_id", null: false
     t.integer "genre_id", null: false
     t.datetime "created_at", precision: 6, null: false

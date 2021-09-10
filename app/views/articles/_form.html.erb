@@ -23,12 +23,12 @@
 
   <div class="field">
     <%= form.label :genre_id, "記事のジャンル" %>
-    <%= form.text_field :genre_id %>
+    <%= form.collection_select(:genre_id, Genre.all, :id, :name, {}, {class:"genre-select"}) %>
   </div>
 
   <div class="field">
     <%= form.label :rank_id, "記事のレベル" %>
-    <%= form.text_field :rank_id %>
+    <%= form.collection_select(:rank_id, Rank.all, :id, :name, {}, {class:"genre-select"}) %>
   </div>
   
   <div class="actions">

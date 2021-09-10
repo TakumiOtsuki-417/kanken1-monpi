@@ -21,13 +21,13 @@
             <h3>正答：<%= q.answer %></h3>
             <div class="explain">解説：<%= q.explain %></div>
             <div class="meta">
-              <p>レベル：<%= Rank.find_by(id: q.level).name %></p>
-              <p>ジャンル：<%= Genre.find_by(id: q.genre).name %></p>
+              <p>レベル：<%= Rank.find_by(id: q.rank_id).name %></p>
+              <p>ジャンル：<%= Genre.find_by(id: q.genre_id).name %></p>
             </div>
             <div class="link">
               <%= link_to '詳細', makequest_path(q.id) %>
               <%= link_to '編集', edit_makequest_path(q.id) %>
-              <%= link_to '削除', makequests_path(q.id), method: :delete, data: { confirm: 'マジで削除しますか?' } %>
+              <%= link_to '削除', makequest_path(q.id), method: :delete, data: { confirm: 'マジで削除しますか?' } %>
             </div>
           </section>
         </li>
