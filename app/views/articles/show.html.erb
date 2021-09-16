@@ -14,16 +14,20 @@
       <h2>さあ、頑張ろう！</h2>
       <%= @article.content.html_safe %>
     </section>
-    <section id="block-link">
+  </article>
+  <aside>
+    <div id="block-link">
     <% if user_signed_in? %>    
       <h2>問題に挑戦しよう！</h2>
       <p>以下のリンクから、この記事に基づいた問題に挑戦することができます。</p>
       <div id="link">
-        <%= link_to '問題に挑戦する', article_quests_path(@article) %>
+        <div><%= link_to '問題に挑戦する', article_quests_path(@article) %></div>
+        <div><%= link_to '一覧に戻る', articles_path %></div> 
       </div>
-    </section>
+    </div>
     <% end %>
     <% if admin_signed_in? %>
+    <div id="block-link">
       <h2>記事は以上でした。</h2>
       <div id="link">
         <div><%= link_to '問題文をセットする', new_article_quest_path(@article) %></div>
@@ -31,6 +35,7 @@
         <div><%= link_to 'この記事を削除する', article_path(@article), method: :delete %></div>
         <div><%= link_to '一覧に戻る', articles_path %></div> 
       </div>
+    </div>
     <% end %>
-  </article>
+  <aside>
 </main>

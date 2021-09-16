@@ -28,7 +28,6 @@ class Admin < ApplicationRecord
     if !collect_flag
       errors[:base] << "One of the four codes is wrong." 
     end
-    puts "ちゃんと使ってます？？"
   end
 
 end

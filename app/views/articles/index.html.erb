@@ -5,9 +5,8 @@
   <% if user_signed_in? %>
     <section id="block-userinfo">
       <h2>ユーザー情報</h2>
-      <div><%= image_tag "rank#{ @user.rank_id }.png" %></div>
+      <div><%= image_tag "level#{ @user.rank_id }.png" %></div>
       <p><%= @user.nickname %></p>
-      <p>称号：<%= @user_rank %></p>
       <p>総合スコア：<%= @total_score %></p>
     </section>
   <% end %>

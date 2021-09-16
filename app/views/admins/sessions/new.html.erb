@@ -2,13 +2,7 @@
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <%= render "admins/shared/error_messages", resource: resource %>
-  <%# deivseのフラッシュメッセージを表示 %>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
 
-  <% flash.each do |key, value| %>
-  <%= content_tag :div, value, class: key %>
-  <% end %>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
