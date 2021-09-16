@@ -1,54 +1,74 @@
-<h2>Sign up</h2>
+<main id="block-signin">
+
+<h2>新規登録</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "admins/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <div><%= f.label :nickname, value: "ニックネーム" %></div>
-    <div><%= f.text_field :nickname %></div>
+    <div class="col">
+      <div><%= f.label :nickname, value: "ニックネーム" %></div>
+      <div><%= f.text_field :nickname %></div>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="col">
+      <div><%= f.label :email %></div>
+      <div><%= f.email_field :email, autofocus: true, autocomplete: "email" %></div>
+    </div>
+  </div>
+
+  <div class="field field-remember">
+    <div class="col">
+      <div><%= f.label :password %></div>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <div><%= f.password_field :password, autocomplete: "new-password" %></div>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <div class="col">
+      <div><%= f.label :password_confirmation %><br /></div>
+      <div><%= f.password_field :password_confirmation, autocomplete: "new-password" %></div>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <div class="col">
+      <div><%= f.label :code1, value: "特別コード1 (必須)" %></div>
+      <div><%= f.text_field :code1 %></div>
+    </div>
   </div>
 
   <div class="field">
-    <div><%= f.label :code1, value: "特別コード1 (必須)" %></div>
-    <div><%= f.text_field :code1 %></div>
+    <div class="col">
+      <div><%= f.label :code2, value: "特別コード2 (必須)" %></div>
+      <div><%= f.text_field :code2 %></div>
+    </div>
   </div>
 
   <div class="field">
-    <div><%= f.label :code2, value: "特別コード2 (必須)" %></div>
-    <div><%= f.text_field :code2 %></div>
+    <div class="col">
+      <div><%= f.label :code3, value: "特別コード3 (必須)" %></div>
+      <div><%= f.text_field :code3 %></div>
+    </div>
   </div>
 
   <div class="field">
-    <div><%= f.label :code3, value: "特別コード3 (必須)" %></div>
-    <div><%= f.text_field :code3 %></div>
+    <div class="col">
+      <div><%= f.label :code4, value: "特別コード4 (必須)" %></div>
+      <div><%= f.text_field :code4 %></div>
+    </div>
   </div>
 
-  <div class="field">
-    <div><%= f.label :code4, value: "特別コード4 (必須)" %></div>
-    <div><%= f.text_field :code4 %></div>
-  </div>
-
-  <div class="actions">
+  <div class="actions id="block-submit"">
     <%= f.submit "Sign up" %>
   </div>
 <% end %>
+
+</main>
 
 <%= render "admins/shared/links" %>

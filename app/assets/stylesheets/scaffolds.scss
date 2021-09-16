@@ -29,7 +29,8 @@ a {
 }
 
 #error_explanation {
-  width: 450px;
+  width: 100%;
+  max-width: 650px;
   border: 2px solid red;
   padding: 7px 7px 0;
   margin-bottom: 20px;
@@ -46,8 +47,8 @@ a {
   }
 
   ul li {
-    font-size: 12px;
-    list-style: square;
+    font-size: 0.7rem;
+    color: red;
   }
 }
 

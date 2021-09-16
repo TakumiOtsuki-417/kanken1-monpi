@@ -1,49 +1,65 @@
-<h2>Log in</h2>
+<main id="block-signin">
+
+<h2>ログイン</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <%= render "admins/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="col">
+      <div><%= f.label :email, value: "Eメールアドレス" %></div>
+      <div><%= f.email_field :email, autofocus: true, autocomplete: "email" %></div>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <div class="col">
+      <div><%= f.label :password, value: "パスワード" %></div>
+      <div><%= f.password_field :password, autocomplete: "current-password" %></div>
+    </div>
   </div>
 
   <% if devise_mapping.rememberable? %>
-    <div class="field">
+    <div class="field field-remember">
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
     </div>
   <% end %>
 
   <div class="field">
-    <div><%= f.label :code1, value: "特別コード1 (必須)" %></div>
-    <div><%= f.text_field :code1 %></div>
+    <div class="col">
+      <div><%= f.label :code1, value: "特別コード1 (必須)" %></div>
+      <div><%= f.text_field :code1 %></div>
+    </div>
   </div>
 
   <div class="field">
-    <div><%= f.label :code2, value: "特別コード2 (必須)" %></div>
-    <div><%= f.text_field :code2 %></div>
+    <div class="col">
+      <div><%= f.label :code2, value: "特別コード2 (必須)" %></div>
+      <div><%= f.text_field :code2 %></div>
+    </div>
   </div>
 
   <div class="field">
-    <div><%= f.label :code3, value: "特別コード3 (必須)" %></div>
-    <div><%= f.text_field :code3 %></div>
+    <div class="col">
+      <div><%= f.label :code3, value: "特別コード3 (必須)" %></div>
+      <div><%= f.text_field :code3 %></div>
+    </div>
   </div>
 
   <div class="field">
-    <div><%= f.label :code4, value: "特別コード4 (必須)" %></div>
-    <div><%= f.text_field :code4 %></div>
+    <div class="col">
+      <div><%= f.label :code4, value: "特別コード4 (必須)" %></div>
+      <div><%= f.text_field :code4 %></div>
+    </div>
   </div>
 
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div class="actions" id="block-submit">
+    <%= f.submit "ログイン" %>
   </div>
 <% end %>
 
+
+</main>
 <%= render "admins/shared/links" %>

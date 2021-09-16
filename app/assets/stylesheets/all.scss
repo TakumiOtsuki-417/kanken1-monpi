@@ -89,20 +89,29 @@ h4 {
 
 #block-signin {
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 2rem;
 
   .field{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &.field-remember {
+      flex-direction: row;
+      justify-content: center;
+      margin-top: -20px;
+    }
 
     .col{
       margin-bottom:20px;
     }
-    br{
-      height: 0;
-    }
+    
 
   }
+
+
 
   #remember {
     display: flex;
