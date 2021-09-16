@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "mediaqueries";
+
+
 #block-userinfo {
   width: 100%;
   display: flex;
@@ -24,17 +27,33 @@
     display: flex;
     justify-content: start;
     align-items: flex-start;
-    flex-direction: column;    
+    flex-direction: column;
+    flex-wrap: wrap;
+    @include mq-up('md') {
+      flex-direction: row;
+    }
 
-    h2 {
-      max-width: 300px;
-      border-bottom: 1px solid rgba(0,0,0,0.6);
-      margin-bottom: 30px;
+    .level {
+      width: 100%;
+
+      h2 {
+        max-width: 300px;
+        border-bottom: 1px solid rgba(0,0,0,0.6);
+        margin-bottom: 30px;
+      }
     }
 
     .block-genres {
       width: 100%;
       margin-bottom:30px;
+      @include mq-up('md') {
+        width: 50%;
+        padding-right: 2rem;
+      }
+      @include mq-up('lg') {
+        padding-right: 5rem;
+      }
+      
 
       h3 {
         border-left:15px solid rgba(255,0,0,0.8);
@@ -46,10 +65,7 @@
         border-bottom: 1px dotted rgba(0,0,0,0.6);
         padding: 10px 5px;
         margin: 0 0 10px 0;
-
-        &:last-child {
-          border: none;
-        }
+        margin-left: 1rem;
       }
 
       
@@ -71,6 +87,10 @@
 
   #block-content {
     padding:20px 0;
+
+    img {
+      max-width: 100%;
+    }
   }
 
   h1{
@@ -122,4 +142,43 @@
       }
     }
   }
+}
+
+#block-newarticle {
+
+  h1 {
+    margin-bottom: 2rem;
+  }
+
+  .field {
+    margin-bottom: 1rem;
+
+    label {
+      display: block;
+    }
+
+    input[type="text"] {
+      min-height:1.5rem;
+      min-width:250px;
+      width: 50%;
+      max-width:800px;
+    }
+
+    select {
+      min-height: 1.5rem;
+      width: 50%;
+      min-width: 180px;
+      max-width: 450px;
+    }
+  }
+
+  > a {
+    display: inline-block;
+    margin-top: 2rem;
+    border: 1px solid rgba(0,0,0,0.6);
+    padding: 0.2rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+
 }

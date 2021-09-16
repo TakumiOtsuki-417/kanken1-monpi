@@ -1,12 +1,12 @@
 class Rank < ActiveHash::Base
 
   self.data = [
-    { id: 0, name: '入門者' },
-    { id: 1, name: '序の口' },
-    { id: 2, name: 'まだまだ初心者' },
-    { id: 3, name: 'ようこそ中級' },
-    { id: 4, name: 'まだまだ中級' },
-    { id: 5, name: '希望は見えてきた？' },
+    { id: 0, name: '門前眺めし者' },
+    { id: 1, name: '大夢見ゆる者' },
+    { id: 2, name: '踏み込む者' },
+    { id: 3, name: '叩きし者' },
+    { id: 4, name: '開かれし者' },
+    { id: 5, name: 'その先へ..' },
   ]
 
   # アソシエーション

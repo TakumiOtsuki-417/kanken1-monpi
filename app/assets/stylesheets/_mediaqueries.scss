@@ -1,0 +1,15 @@
+$sizes: xl, lg, md, sm, xs;  //冒頭に使うサイズを明記するとわかりやすい
+$breakpoint-up: ( 
+  'xs': 'screen and (min-width: 321px)',
+  'sm': 'screen and (min-width: 376px)',
+  'md': 'screen and (min-width: 501px)',
+  'lg': 'screen and (min-width: 961px)',
+  'xl': 'screen and (min-width: 1201px)',
+) !default;
+
+//mixinを定義（初期値はmd）
+@mixin mq-up($breakpoint: md) {
+  @media #{map-get($breakpoint-up, $breakpoint)} {
+    @content;
+  }
+}

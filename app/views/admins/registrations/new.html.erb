@@ -4,6 +4,11 @@
   <%= render "admins/shared/error_messages", resource: resource %>
 
   <div class="field">
+    <div><%= f.label :nickname, value: "ニックネーム" %></div>
+    <div><%= f.text_field :nickname %></div>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
@@ -19,6 +24,26 @@
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <div><%= f.label :code1, value: "特別コード1 (必須)" %></div>
+    <div><%= f.text_field :code1 %></div>
+  </div>
+
+  <div class="field">
+    <div><%= f.label :code2, value: "特別コード2 (必須)" %></div>
+    <div><%= f.text_field :code2 %></div>
+  </div>
+
+  <div class="field">
+    <div><%= f.label :code3, value: "特別コード3 (必須)" %></div>
+    <div><%= f.text_field :code3 %></div>
+  </div>
+
+  <div class="field">
+    <div><%= f.label :code4, value: "特別コード4 (必須)" %></div>
+    <div><%= f.text_field :code4 %></div>
   </div>
 
   <div class="actions">

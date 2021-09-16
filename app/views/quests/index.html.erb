@@ -6,7 +6,7 @@
 <% # 管理者アカウントの場合、登録問題一覧表示 %>
 <% if admin_signed_in? %>
 <h2>セットされた問題一覧</h2>
-<p>セット数：<%= @quest_count %></p>
+<p>セット数：<%= @quest_count %> / 100</p>
   <% if @quests.any? %>
 
     <% @quests.each do |quest| %>
@@ -35,7 +35,7 @@
 
   <% end %>
   <% if @quest_count <= 100 %>
-    <p><%= link_to "問題をセットする", new_article_quest_path(@article.id) %></p>
+    <p id="newset-link"><%= link_to "問題をセットする", new_article_quest_path(@article.id) %></p>
   <% end %>
 <% else %>
 

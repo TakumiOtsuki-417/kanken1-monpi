@@ -30,17 +30,15 @@ class QuestsController < ApplicationController
     @quest = Quest.find(params[:id])
   end
   def new
-    @article = Article.find(params[:article_id])
-    genre = @article.genre_id
-    rank = @article.rank_id
-    @select_quests = Quest.where(["genre_id = :genre_id and rank_id <= :rank_id", {genre_id: genre, rank_id: rank}])
-    
+    @article_quest = ArticleQuest.new
+    reset_article_info
   end
   def create
     @article_quest = ArticleQuest.new(quest_params)
     if @article_quest.save
       redirect_to article_quests_path(params[:article_id])
     else
+      reset_article_info
       render :new
     end
   end
@@ -66,6 +64,12 @@ class QuestsController < ApplicationController
     if quest_count >= 100
       redirect_to article_quests_path(article.id)
     end
+  end
+  def reset_article_info
+    @article = Article.find(params[:article_id])
+    @genre = @article.genre_id
+    @rank = @article.rank_id
+    @select_quests = Quest.where(["genre_id = :genre_id and rank_id <= :rank_id", {genre_id: @genre, rank_id: @rank}])
   end
 
 end

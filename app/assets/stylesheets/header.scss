@@ -1,9 +1,10 @@
+@import "mediaqueries";
+
 header {
   overflow: visible;
   background-color: transparent;
   width: 100%;
   min-height: 5rem;
-  padding: 1.5rem;
   border-bottom: 1px solid black;
   margin-bottom:30px;
 
@@ -16,6 +17,18 @@ header {
     #header-logo {
       width: 100%;
       margin-bottom:20px;
+
+      h1 {
+        max-width: 70%;
+        @include mq-up('lg'){
+          max-width: 40%;
+        }
+
+        img {
+          max-width: 100%;
+        }
+
+      }
     }
 
     #header-nav {
@@ -28,7 +41,11 @@ header {
         display: flex;
         justify-content: flex-start;
         align-items: center;
-  
+        
+        li:first-child {
+          display: none;
+        }
+
         .user-link {
           margin-left: 10px;
           border: 1px double rgba(0,0,0,0.5);
@@ -52,7 +69,6 @@ footer {
   border-top: 1px solid black;
   position: absolute;
   bottom:0;
-  padding:20px 0;
   display:flex;
   width: 100%;
 

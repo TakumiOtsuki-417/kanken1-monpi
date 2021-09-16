@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "mediaqueries";
+
 #block-makequest {
   min-height: 90vh;
 
@@ -66,7 +68,7 @@
 
       ul {
         display: flex;
-        flex-direction: start;
+        overflow-x: scroll;
 
         li {
           border: 1px solid #00000099;
@@ -74,6 +76,10 @@
           margin: 0 4px;
           cursor: pointer;
           transition: all 0.2s;
+          min-width:5rem;
+          @include mq-up('md') {
+            min-width: 2rem;
+          }
 
           &:hover {
             background-color: rgba(0,0,0,0.8);
@@ -83,6 +89,7 @@
             background-color:rgba(0,0,0,0.8);
             color: white;
           }
+
         }
 
 
@@ -116,6 +123,7 @@
           opacity: 1;
       }
     }
+
     .genres {
       display: none;
 
@@ -123,6 +131,13 @@
         display: block;
         animation: show 0.2s linear 0s;
       }
+      section {
+        div {
+          margin-top: 1rem;
+        }
+      }
+
+
     }
 
 

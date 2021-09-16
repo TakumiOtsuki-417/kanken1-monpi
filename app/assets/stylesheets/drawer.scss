@@ -34,7 +34,13 @@ a {
     display:inline-block;
     top:20px;
     right:20px;
+    width: 50px;
+    height: 50px;
     z-index:100;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .drawer-line,
@@ -45,7 +51,7 @@ a {
     height: 3px;
     width: 25px;
     border-radius: 3px;
-    background: #333;
+    background: rgba(255, 255, 255, 0.8);
     transition: 0.5s;
     position: absolute;
   }
@@ -73,7 +79,6 @@ a {
   span.menu-control-close,
   nav a {
     font-size: 1.3rem;
-    margin-bottom: 1.5rem;
   }
   
   span.menu-control-open,
@@ -86,11 +91,11 @@ a {
     position: relative;
     font-size: 1.2rem;
     line-height: 150%;
-    margin-top: 5px;
-    display:inline-block;
-    height:50px;
-    width: 50px;
-
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
   }
   
   span.menu-control-close {
@@ -133,7 +138,12 @@ a {
 
 .menu--active {
   height: 100vh;
-  overflow: hidden; 
+  overflow: hidden;
+
+  #menu-btn {
+    background-color: transparent;
+    box-shadow: none;
+  }
 
   /* アイコンがクリックされたら真ん中の線を透明にする */
   .drawer-line {
@@ -185,9 +195,9 @@ a {
 // This media query sets the menu width to be slightly smaller on a larger screen (think an iPad)
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .menu--active .menu {
-    width: 40%;
+    width: 100%;
     .menu-inner {
-      width: 40vw;
+      width: 100%;
     }
   }
 }

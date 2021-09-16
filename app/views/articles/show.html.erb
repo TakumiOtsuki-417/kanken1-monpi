@@ -28,6 +28,7 @@
       <div id="link">
         <div><%= link_to '問題文をセットする', new_article_quest_path(@article) %></div>
         <div><%= link_to 'この記事を編集する', edit_article_path(@article) %></div>
+        <div><%= link_to 'この記事を削除する', article_path(@article), method: :delete %></div>
         <div><%= link_to '一覧に戻る', articles_path %></div> 
       </div>
     <% end %>
