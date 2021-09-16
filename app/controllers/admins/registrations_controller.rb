@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admins::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -10,9 +10,15 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    @admin = Admin.new(configure_sign_up_params)
+    binding.pry
+    unless @admin.valid?
+      flash.now[:alert] = @admin.errors.full_messages
+      render :new and return
+    end
+    redirect_to root_path
+  end
 
   # GET /resource/edit
   # def edit
@@ -38,12 +44,12 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+  def configure_sign_up_params
+    params.require(:admin).permit(:email, :nickname, :password, :code1, :code2, :code3, :code4)
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params

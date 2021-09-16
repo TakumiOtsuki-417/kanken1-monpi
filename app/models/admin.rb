@@ -16,8 +16,9 @@ class Admin < ApplicationRecord
   end
   validate :add_errors
 
+
   def add_errors
-    correct_codes = ["correct1", "correct2", "correct3", "correct4"]
+    correct_codes = [ENV['MONPI_ADMIN_AUTH_CODE1'], ENV['MONPI_ADMIN_AUTH_CODE2'], ENV['MONPI_ADMIN_AUTH_CODE3'], ENV['MONPI_ADMIN_AUTH_CODE4']]
     collect_flag = true
     codes = [code1, code2, code3, code4]
     4.times do |i|
@@ -25,9 +26,9 @@ class Admin < ApplicationRecord
         collect_flag = false
       end
     end
+    binding.pry
     if !collect_flag
       errors[:base] << "One of the four codes is wrong." 
     end
   end
-
 end

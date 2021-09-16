@@ -36,14 +36,14 @@
       <div><%= f.password_field :password_confirmation, autocomplete: "new-password" %></div>
     </div>
   </div>
-  <input name="user[rank]" type="hidden" value="0">
+  <input name="user[rank_id]" type="hidden" value="0">
   <div class="actions">
     <%= f.submit "新規登録する" %>
   </div>
 <% end %>
 
-<%= render "users/shared/links" %>
 
 </main>
 
+<%= render "users/shared/links" %>
 

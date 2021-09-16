@@ -22,4 +22,4 @@ class User < ApplicationRecord
     # アソシエーション（ActiveHash）
     extend ActiveHash::Associations::ActiveRecordExtensions
     belongs_to :rank
-  end
+end

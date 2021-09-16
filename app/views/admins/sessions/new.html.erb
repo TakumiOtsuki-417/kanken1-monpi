@@ -1,9 +1,14 @@
 <main id="block-signin">
 
 <h2>ログイン</h2>
-
+<% resource = Admin.new unless resource %>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <%= render "admins/shared/error_messages", resource: resource %>
+  <div id="notification">
+  <% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: key %>
+  <% end %>
+  </div>
 
   <div class="field">
     <div class="col">

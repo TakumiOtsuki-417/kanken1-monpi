@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   end
   resources :makequests
   devise_for :admins, controllers: {
-     sessions: 'admins/sessions'
-   }
+    registrations: 'admins/registrations'
+  }
   devise_for :users
   root to:"articles#index"
 end

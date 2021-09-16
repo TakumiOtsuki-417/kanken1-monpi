@@ -93,6 +93,18 @@ h4 {
   flex-direction: column;
   margin-bottom: 2rem;
 
+  #notification {
+    border: 2px solid red;
+    background: rgba(255, 0, 0, 0.3);
+    padding: 0.5rem;
+    margin: 1rem 0;
+
+    .alert {
+      color: red;
+      font-size: 0.8rem;
+    }
+  }
+
   .field{
     display: flex;
     flex-direction: column;
