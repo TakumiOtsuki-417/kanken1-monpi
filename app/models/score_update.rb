@@ -16,14 +16,44 @@ class ScoreUpdate
     validates :user_id
   end
 
-
+  # saveまたはupdateするメソッド
   def save(params, is_create)
     # 二度手間な気もするセット
     @user = User.find(params[:user_id])
     @article = Article.find(params[:article_id])
-    @para = params.permit({score_update: {}}, :article_id)
     @para_for_each = params.permit(score_update: {})[:score_update]
     # 以下、本番
+
+    update_repeat
+    
+    #createアクションにおけるscore保存処理
+    if is_create == true
+      # 点数を保存（記事とユーザーの中間データ保存）
+      save_score = Score.create(user_id: @user.id, article_id: @article.id, score: @article_score)
+    # updateアクションにおけるscore保存処理
+    elsif is_create == false
+      # 点数を保存（記事とユーザーの中間データ保存）
+      update_score = Score.find_by(user_id: @user.id, article_id: @article.id)
+      saved_score = update_score.score
+      # 形式的に保存でき、かつ点数が過去より上回ってる場合
+      if @article_score > saved_score
+        update_score.update(user_id: @user.id, article_id: @article.id, score: @article_score)
+        # リダイレクトする前に、称号の更新可能性を計算
+        calculate_rank
+      # 今回点数が下回ってた場合（score更新なし）
+      else
+        return
+      end
+    else
+      puts "何でやねん"
+      binding.pry
+      return
+    end
+  end
+
+  private
+  # 問題の正解かどうかを記録するメソッド
+  def update_repeat
     article_quests = ArticleQuest.where(article_id: @article.id)
     quests = []
     article_quests.each do |article_quest|
@@ -57,43 +87,16 @@ class ScoreUpdate
     # 点数＝（正解数÷問題数）＊１００
     @article_score = (correct.to_f / quests.length.to_f * 100).round
 
-    #ここで、createアクションとupdateアクションの場合分けを行いたい
-    if is_create == true
-      #createアクションにおけるscore保存処理
-      # 点数を保存（記事とユーザーの中間データ保存）
-      save_score = Score.create(user_id: @user.id, article_id: @article.id, score: @article_score)
-    elsif is_create == false
-      # updateアクションにおけるscore保存処理
-      # 点数を保存（記事とユーザーの中間データ保存）
-      update_score = Score.find_by(user_id: @user.id, article_id: @article.id)
-      saved_score = update_score.score
-      # 形式的に保存でき、かつ点数が過去より上回ってる場合
-      if @article_score > saved_score
-        update_score.update(user_id: @user.id, article_id: @article.id, score: @article_score)
-        # リダイレクトする前に、称号の更新可能性を計算
-        calculate_rank
-      # 今回点数が下回ってた場合
-      else
-        return
-      end
-    else
-      puts "何でやねん"
-      binding.pry
-      return
-    end
   end
-
-  private
-
+  # ランクを計算するメソッド
   def calculate_rank
-    # 総合スコアを計算
     scores = Score.where(user_id: @user.id)
     @total_score = 0
     scores.each do |score|
       @total_score += score.score
     end
     # テストの合格数を計算（７０点以上）
-    test_article = Article.where(genre: 2)
+    test_article = Article.where(genre_id: 2)
     @test_ok = 0
     test_article.each do |ta|
       ta_score = Score.find_by(user_id: @user.id, article_id: ta.id)
