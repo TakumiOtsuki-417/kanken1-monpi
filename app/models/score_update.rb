@@ -9,16 +9,8 @@ class ScoreUpdate
   attr_accessor :user_id
   attr_accessor :score_update
 
-  # バリデーションを記述
-  with_options presence: true do
-    validates :score_update
-    validates :article_id
-    validates :user_id
-  end
-
   # saveまたはupdateするメソッド
   def save(params, is_create)
-    # 二度手間な気もするセット
     @user = User.find(params[:user_id])
     @article = Article.find(params[:article_id])
     @para_for_each = params.permit(score_update: {})[:score_update]
