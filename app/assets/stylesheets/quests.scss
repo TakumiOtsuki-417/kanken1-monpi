@@ -29,20 +29,32 @@
 
     ul {
       display: flex;
-      justify-content: space-between;
       padding: 5px 0;
       border-top: 1px solid rgba(0,0,0,0.4);
-      border-bottom: 1px solid rgba(0,0,0,0.4);      
+      border-bottom: 1px solid rgba(0,0,0,0.4);
+      flex-direction: column;
+      @include mq-up('md') {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      
 
       li {
-        width:25%;
-        border-right: 1px solid rgba(0,0,0,0.4);
-        text-align: center;
+        width:90%;
+        margin-left: 1rem;
+        border-bottom: 1px solid rgba(0,0,0,0.4);
+        @include mq-up('md') {
+          width: 25%;
+          text-align: center;
+          border-bottom: none;
+          border-right: 1px solid rgba(0,0,0,0.4);
+        }
       }
 
       li:last-child {
         border: none;
       }
+
     }
 
     .select-radio {
@@ -110,6 +122,9 @@
   }
 
   #block-answer {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
     
     #first-btn {
       display: none;
@@ -123,6 +138,23 @@
       background-color: rgba(255, 0, 0, 0.2);
       padding: 5px;
       font-weight: 800;
+    }
+  }
+
+  #aside-links {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    a {
+      display: block;
+      min-width: 220px;
+      width: 50%;
+      max-width: 700px;
+      border: 1px solid rgba(0,0,0,0.8);
+      margin: 0.5rem;
+      padding: 0.3rem;
+      text-align: center;
     }
   }
 

@@ -80,11 +80,15 @@
         <%= f.submit value: "回答する", class: "second-content" %>
       </div>
     <% end %>
-  <%= link_to 'テキストへ戻る', article_path(@article.id) %>
 <% end %>
 
 
 </article>
+<div id="aside-links">
+  <%= link_to 'テキストへ戻る', article_path(@article.id) %>
+  <%= link_to 'トップへ戻る', root_path %>
+</div>
 </main>
+
 
 
