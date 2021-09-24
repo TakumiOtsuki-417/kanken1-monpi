@@ -12,11 +12,12 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     @admin = Admin.new(configure_sign_up_params)
-    binding.pry
     unless @admin.valid?
       flash.now[:alert] = @admin.errors.full_messages
       render :new and return
     end
+    @admin.save
+    sign_in(:admin, @admin)
     redirect_to root_path
   end
 

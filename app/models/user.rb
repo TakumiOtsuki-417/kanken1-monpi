@@ -10,8 +10,10 @@ class User < ApplicationRecord
       validates :nickname
       validates :email
       validates :password
-      validates :rank_id, format: {with: /\A[0-9]+\z/, message: "is invalid. Input only half-number"}
+      validates :rank_id
     end
+    validates :rank_id, numericality: {only_integer: true, message: 'is invalid. Input only half-number'}
+    validates :rank_id, numericality: {less_than_or_equal_to: 4, message: 'is invalid. Input less than 5'}
 
     # アソシエーション
     has_many :scores

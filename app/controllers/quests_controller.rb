@@ -9,20 +9,12 @@ class QuestsController < ApplicationController
       quest = Quest.find(article_quest.quest_id)
       @quests << quest
     end
-    # ユーザーの場合に以下の処理を行う
+    # ユーザーの場合にスコア既存チェック処理を行う
     if user_signed_in?
-      # 記事に紐づいたスコア記録がある場合
-      unless Score.find_by(user_id: current_user.id, article_id: @article.id).nil?
-        @score = ScoreUpdate.new
-        @score_id = Score.find_by(user_id: current_user.id, article_id: @article.id)
-        @rescore = ""
-      # ない場合
-      else
-        @score = ScoreUpdate.new
-      end
+      score_exist_check
     end
+    # 管理者の場合は問題数カウント処理
     if admin_signed_in?
-      #登録された問題数をカウント
       @quest_count = @article_quests.length
     end
   end
@@ -48,7 +40,9 @@ class QuestsController < ApplicationController
     article_quest.destroy
     redirect_to article_quests_path(article_id)
   end
-    private
+
+  private
+
   def redirect_user
     if !admin_signed_in?
       redirect_to root_path
@@ -56,6 +50,15 @@ class QuestsController < ApplicationController
   end
   def quest_params
     params.require(:quest).permit(:article_id, :quest_id)
+  end
+  def score_exist_check
+    @score = ScoreUpdate.new
+    score_exist_or_not = Score.find_by(user_id: current_user.id, article_id: @article.id)
+    # 記事に紐づいたスコア記録がある場合
+    unless score_exist_or_not.nil?
+      @score_id = score_exist_or_not
+      @rescore = ""
+    end
   end
   def redirect_by_count
     article = Article.find(params[:article_id])
@@ -71,5 +74,6 @@ class QuestsController < ApplicationController
     @rank = @article.rank_id
     @select_quests = Quest.where(["genre_id = :genre_id and rank_id <= :rank_id", {genre_id: @genre, rank_id: @rank}])
   end
+  
 
 end

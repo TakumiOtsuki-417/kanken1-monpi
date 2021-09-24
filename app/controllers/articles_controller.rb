@@ -4,18 +4,7 @@ class ArticlesController < ApplicationController
   def index
       @genre_names = ['四字熟語', '故事・諺', '熟語訓・当て字', '読み取り', '書取り', '国字', '熟語と訓読み', '対義語・類義語', 'テスト']
     if user_signed_in?
-      @user = User.find(current_user.id)
-      # スコアの計算
-      @score = Score.where(user_id: @user.id)
-      @total_score = 0
-      @score.each do |score|
-        @total_score += score.score
-      end
-      # ユーザーの状況に応じて記事の量を分ける
-      @articles = Article.where('rank_id <= ?', @user.rank_id)
-      # レベル数値
-      @all_rank = @user.rank_id + 1
-      @user_rank = Rank.find(@user.rank_id).name
+      set_user_info
     elsif admin_signed_in?
       @articles = Article.all
       # 全てのレベル数値
@@ -75,5 +64,20 @@ class ArticlesController < ApplicationController
 
     def article_params
       params.require(:article).permit(:title, :content, :rank_id, :genre_id)
+    end
+
+    def set_user_info
+      @user = User.find(current_user.id)
+      # スコアの計算
+      @score = Score.where(user_id: @user.id)
+      @total_score = 0
+      @score.each do |score|
+        @total_score += score.score
+      end
+      # ユーザーの状況に応じて記事の量を分ける
+      @articles = Article.where('rank_id <= ?', @user.rank_id)
+      # レベル数値
+      @all_rank = @user.rank_id + 1
+      @user_rank = Rank.find(@user.rank_id).name
     end
 end

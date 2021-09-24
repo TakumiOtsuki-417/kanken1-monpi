@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
   private
 
   def confirm_signed_in
-    unless user_signed_in? || admin_signed_in? || controller_name == "helps" || controller_name == "sessions"
-      redirect_to new_user_session_path
+    unless user_signed_in? || admin_signed_in? || controller_name == "sessions" || controller_name == "helps"
+        redirect_to new_user_session_path
     end
   end
 

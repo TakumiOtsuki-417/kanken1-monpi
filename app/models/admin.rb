@@ -9,6 +9,7 @@ class Admin < ApplicationRecord
   with_options presence: true do
     validates :email
     validates :password
+    validates :nickname
     validates :code1
     validates :code2
     validates :code3
@@ -26,7 +27,6 @@ class Admin < ApplicationRecord
         collect_flag = false
       end
     end
-    binding.pry
     if !collect_flag
       errors[:base] << "One of the four codes is wrong." 
     end
