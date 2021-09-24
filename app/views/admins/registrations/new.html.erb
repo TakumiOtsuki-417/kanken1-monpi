@@ -14,14 +14,14 @@
 
   <div class="field">
     <div class="col">
-      <div><%= f.label :email %></div>
+      <div><%= f.label :email, value: "Eメール" %></div>
       <div><%= f.email_field :email, autofocus: true, autocomplete: "email" %></div>
     </div>
   </div>
 
   <div class="field field-remember">
     <div class="col">
-      <div><%= f.label :password %></div>
+      <div><%= f.label :password, value: "パスワード" %></div>
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %><br />
@@ -31,7 +31,7 @@
 
   <div class="field">
     <div class="col">
-      <div><%= f.label :password_confirmation %><br /></div>
+      <div><%= f.label :password_confirmation, value: "パスワード（確認）" %><br /></div>
       <div><%= f.password_field :password_confirmation, autocomplete: "new-password" %></div>
     </div>
   </div>
