@@ -31,10 +31,10 @@ RSpec.describe Article, type: :model do
         @article.valid?
         expect(@article.errors.full_messages).to include("Genre is invalid. Input only half-number")
       end
-      it 'Genreが9以上だと登録できない' do
-        @article.genre_id = 9
+      it 'Genreが6以上だと登録できない' do
+        @article.genre_id = 6
         @article.valid?
-        expect(@article.errors.full_messages).to include("Genre is invalid. Input less than 8")
+        expect(@article.errors.full_messages).to include("Genre is invalid. Input less than 6")
       end
       it 'Rankが空だと登録できない' do
         @article.rank_id = nil

@@ -3,8 +3,8 @@ class MakequestsController < ApplicationController
   before_action :set_question, only: %i[ show edit update destroy ]
   def index
     @questions = Quest.all
-    #0~8までのジャンルに分けてインスタンス変数生成
-    9.times do |i|
+    #0~5までのジャンルに分けてインスタンス変数生成
+    6.times do |i|
       each_genre(i)
     end
   end

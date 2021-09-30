@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [ :show, :edit, :update, :destroy ]
   before_action :redirect_unless_admin, only: [:new, :create, :edit, :update, :destroy]
   def index
-      @genre_names = ['四字熟語', '故事・諺', '熟語訓・当て字', '読み取り', '書取り', '国字', '熟語と訓読み', '対義語・類義語', 'テスト']
+      @genre_names = ['四字熟語', '故事・諺', '当て字', '読み取り/書き取り', '対義語・類義語', 'テスト']
     if user_signed_in?
       set_user_info
     elsif admin_signed_in?

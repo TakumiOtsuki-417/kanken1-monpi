@@ -63,10 +63,10 @@ RSpec.describe Quest, type: :model do
         @quest.valid?
         expect(@quest.errors.full_messages).to include("Genre is invalid. Input only half-number")
       end
-      it 'Genreが9以上だと登録できない' do
-        @quest.genre_id = 9
+      it 'Genreが6以上だと登録できない' do
+        @quest.genre_id = 6
         @quest.valid?
-        expect(@quest.errors.full_messages).to include("Genre is invalid. Input less than 8")
+        expect(@quest.errors.full_messages).to include("Genre is invalid. Input less than 6")
       end
       it 'Rankが空だと登録できない' do
         @quest.rank_id = nil

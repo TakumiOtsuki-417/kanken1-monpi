@@ -10,7 +10,7 @@ class Article < ApplicationRecord
       validates :rank_id
     end
   end
-  validates :genre_id, numericality: {less_than_or_equal_to: 8, message: 'is invalid. Input less than 8'}
+  validates :genre_id, numericality: {less_than_or_equal_to: 5, message: 'is invalid. Input less than 6'}
   validates :rank_id, numericality: {less_than_or_equal_to: 4, message: 'is invalid. Input less than 5'}
   # アソシエーション
   has_many :article_quests

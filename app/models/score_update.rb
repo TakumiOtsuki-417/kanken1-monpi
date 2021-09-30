@@ -37,8 +37,6 @@ class ScoreUpdate
         return
       end
     else
-      puts "何でやねん"
-      binding.pry
       return
     end
   end

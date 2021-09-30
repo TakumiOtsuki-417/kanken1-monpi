@@ -11,7 +11,7 @@
         <% end %>
       </ul>
     </div>
-    <% 9.times do |i| %>
+    <% 6.times do |i| %>
     <section id="genre-<%= i %>" class="genres">
       <h2>ジャンル：<%= Genre.find_by(id: i).name %></h2>
       <ul class="quests">
