@@ -12,7 +12,7 @@
     </div>
     <section id="block-content">
       <h2>さあ、頑張ろう！</h2>
-      <%= @article.content.html_safe %>
+      <%= sanitize @article.content, attributes: %w(href class id style src), tags: %w(h1 h2 h3 h4 a img p div section span b strong ul li) %>
     </section>
   </article>
   <aside>
