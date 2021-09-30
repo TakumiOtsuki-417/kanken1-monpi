@@ -2151,14 +2151,18 @@ Article.create!(
   rank_id: 4
 )
 Admin.create!(
-  nickname: 'テスト用管理者アカウント',
+  nickname: 'お試し管理者',
   email: 'test@test.com',
-  password: 'testtest6000'
+  password: 'test6000',
+  code1: ENV['MONPI_ADMIN_AUTH_CODE1'],
+  code2: ENV['MONPI_ADMIN_AUTH_CODE2'],
+  code3: ENV['MONPI_ADMIN_AUTH_CODE3'],
+  code4: ENV['MONPI_ADMIN_AUTH_CODE4'] 
 )
 User.create!(
-  nickname: 'テスト用ユーザー',
+  nickname: 'お試しユーザー',
   email: 'test2@test.com',
-  password: 'testtest6000',
+  password: 'test6000',
   rank_id: 0
 )
 
