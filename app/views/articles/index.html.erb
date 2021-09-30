@@ -7,7 +7,7 @@
       <h2>ユーザー情報</h2>
       <div><%= image_tag "level#{ @user.rank_id }.png" %></div>
       <p><%= @user.nickname %></p>
-      <p>総合スコア：<%= @total_score %></p>
+      <p id="total-score">総合スコア：<%= @total_score %></p>
     </section>
   <% end %>
   <!-- 記事一覧のブロック -->
@@ -31,7 +31,7 @@
                 <% if user_signed_in? %>
                   <% score = Score.find_by(user_id: @user.id, article_id: article.id) %>
                   <% unless score.nil? %>
-                    <p>SCORE:<%= score.score %></p>
+                    <p id="score-<%= article.id %>">SCORE:<%= score.score %></p>
                   <% else %>
                     <p>SCORE:0（未挑戦）</p>
                   <% end %>

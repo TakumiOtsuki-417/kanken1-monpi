@@ -30,10 +30,10 @@
     <div id="block-link">
       <h2>記事は以上でした。</h2>
       <div id="link">
-        <div><%= link_to '問題文をセットする', new_article_quest_path(@article) %></div>
-        <div><%= link_to 'この記事を編集する', edit_article_path(@article) %></div>
-        <div><%= link_to 'この記事を削除する', article_path(@article), method: :delete %></div>
-        <div><%= link_to '一覧に戻る', articles_path %></div> 
+        <div><%= link_to '問題文をセットする', new_article_quest_path(@article), id:"btn-quest" %></div>
+        <div><%= link_to 'この記事を編集する', edit_article_path(@article), id:"btn-edit" %></div>
+        <div><%= link_to 'この記事を削除する', article_path(@article), method: :delete, id:"btn-destroy" %></div>
+        <div><%= link_to '一覧に戻る', articles_path, id:"btn-index" %></div> 
       </div>
     </div>
     <% end %>
