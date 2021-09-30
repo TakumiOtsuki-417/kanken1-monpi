@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [ :show, :edit, :update, :destroy ]
-
+  before_action :redirect_unless_admin, only: [:new, :create, :edit, :update, :destroy]
   def index
       @genre_names = ['四字熟語', '故事・諺', '熟語訓・当て字', '読み取り', '書取り', '国字', '熟語と訓読み', '対義語・類義語', 'テスト']
     if user_signed_in?
@@ -52,12 +52,17 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: "記事を削除しました" }
+      format.html { redirect_to root_path, notice: "記事を削除しました" }
       format.json { head :no_content }
     end
   end
 
   private
+    def redirect_unless_admin
+      if !admin_signed_in?
+        redirect_to root_path
+      end
+    end
     def set_article
       @article = Article.find(params[:id])
     end

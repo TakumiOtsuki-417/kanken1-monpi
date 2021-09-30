@@ -24,7 +24,7 @@
         <p>🔻解説🔻</p>
         <div class="block-explain"><%= quest.explain %></div>
         <div>
-          <%= link_to "セット解除", article_quest_path(@article.id, quest.id), method: :delete %>
+          <%= link_to "セット解除", article_quest_path(@article.id, quest.id), method: :delete, id: "clear-#{ quest.id }" %>
         </div>
       </section>
     <% end %>
@@ -77,7 +77,7 @@
       <div id="block-answer">
         <div id="nocheck-message">未回答の問題が残っています（赤背景のもの）。<br>全ての問題にチェック回答をしてください。</div>
         <input type="button" id="first-btn" value="回答する（正答を表示）">
-        <%= f.submit value: "回答する", class: "second-content" %>
+        <%= f.submit value: "回答する", class: "second-content", id: "second-btn" %>
       </div>
     <% end %>
 <% end %>

@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :quest do
     question {Faker::Lorem.sentence}
-    select1 {Faker::Lorem.word}
-    select2 {Faker::Lorem.word}
-    select3 {Faker::Lorem.word}
-    select4 {Faker::Lorem.word}
+    select1 {"選択肢１"}
+    select2 {"選択肢２"}
+    select3 {"選択肢３"}
+    select4 {"選択肢４"}
     answer { select1 }
     explain {Faker::Lorem.paragraphs}
     genre_id {Faker::Number.between(from: 0, to: 8)}
