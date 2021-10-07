@@ -9,7 +9,7 @@ class User < ApplicationRecord
     with_options presence: true do
       validates :nickname
       validates :email
-      validates :password
+      validates :password, on: :create
       validates :rank_id
     end
     validates :rank_id, numericality: {only_integer: true, message: 'is invalid. Input only half-number'}

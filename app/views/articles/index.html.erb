@@ -25,7 +25,7 @@
             </div>
             <ul>
             <% articles = Article.where(genre_id: o, rank_id: level) %>
-            <% articles.each do |article| %>
+            <% articles.preload(:scores).each do |article| %>
               <li>
                 <h4><%= article.title %></h4>
                 <% if user_signed_in? %>

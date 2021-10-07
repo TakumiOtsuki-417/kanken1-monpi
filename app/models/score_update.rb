@@ -22,6 +22,8 @@ class ScoreUpdate
     if is_create == true
       # 点数を保存（記事とユーザーの中間データ保存）
       save_score = Score.create(user_id: @user.id, article_id: @article.id, score: @article_score)
+      # リダイレクトする前に、称号の更新可能性を計算
+      calculate_rank
     # updateアクションにおけるscore保存処理
     elsif is_create == false
       # 点数を保存（記事とユーザーの中間データ保存）
@@ -86,7 +88,7 @@ class ScoreUpdate
       @total_score += score.score
     end
     # テストの合格数を計算（７０点以上）
-    test_article = Article.where(genre_id: 2)
+    test_article = Article.where(genre_id: 5)
     @test_ok = 0
     test_article.each do |ta|
       ta_score = Score.find_by(user_id: @user.id, article_id: ta.id)
@@ -98,27 +100,38 @@ class ScoreUpdate
     end
     # テストの合格数と総合スコアによって称号分け（これは得点が下回るケースを除外しているのでOK）
     @rank = 0
-    case @total_score
-      when 100..279
-        @rank = 1
-      when 280..619
-        if @test_ok >= 0
-          @rank = 2
-        end
-      when 620..1199
-        if @test_ok >= 2
-          @rank = 3
-        end
-      when 1200..nil
-        if @test_ok >= 3
-          @rank = 4
-        end
+    case @test_ok
+      when 0
+        @rank = 0
+      when 1
+        #記事数11
+        judge_score(1, 11, 70)
+      when 2
+        #記事数23
+        judge_score(2, 23, 70)
+      when 3
+        #記事数35
+        judge_score(3, 35, 70)
+      when 4
+        #記事数47
+        judge_score(4, 47, 80)
+      when 5
+        @rank = 4
       else
+
     end
     # 現在保存されているランクよりも上であれば上書き
     @user = User.find(@user.id)
     if @rank > @user.rank_id
       @user.update(rank_id: @rank)
+    end
+  end
+
+  def judge_score(judge_rank, article_num, ok_line)
+    max_score = article_num * 100
+    rate = (ok_line * 0.01).round(2)
+    if @total_score >= (max_score * rate)
+      @rank = judge_rank
     end
   end
 

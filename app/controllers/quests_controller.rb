@@ -72,7 +72,12 @@ class QuestsController < ApplicationController
     @article = Article.find(params[:article_id])
     @genre = @article.genre_id
     @rank = @article.rank_id
-    @select_quests = Quest.where(["genre_id = :genre_id and rank_id <= :rank_id", {genre_id: @genre, rank_id: @rank}])
+    # テストジャンルの場合は全てのジャンル問題を取得。
+    unless @genre == 5
+      @select_quests = Quest.where(["genre_id = :genre_id and rank_id <= :rank_id", {genre_id: @genre, rank_id: @rank}])
+    else
+      @select_quests = Quest.where(["rank_id <= :rank_id", {rank_id: @rank}])
+    end
   end
   
 
